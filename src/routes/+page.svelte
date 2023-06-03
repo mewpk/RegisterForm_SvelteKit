@@ -10,6 +10,9 @@
 </svelte:head>
 
 <section>
+	<h1 class="text-red-500">
+		Form
+	</h1>
 	<h1>
 		<span class="welcome">
 			<picture>
@@ -28,7 +31,7 @@
 	<Counter />
 </section>
 
-<style>
+<style  lang="postcss">
 	section {
 		display: flex;
 		flex-direction: column;

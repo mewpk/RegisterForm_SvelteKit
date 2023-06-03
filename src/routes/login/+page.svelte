@@ -43,7 +43,7 @@
 				};
 
 				const response = await fetch(
-					'https://localhost:7193/Line',
+					'https://d18f-2001-fb1-a1-c8d4-e9db-1d44-98ba-89e6.ngrok-free.app/Line',
 					{
 						method: 'POST',
 						headers: {

@@ -43,7 +43,7 @@
 				};
 
 				const response = await fetch(
-					'https://script.google.com/macros/s/AKfycbw8Xei3EBCDanNkhGlBDX7GYHBTjA1dlo8mxmKdS6vTybjAxG-R4fnn51wm7kPKdResdQ/exec',
+					'https://localhost:7193/Line',
 					{
 						method: 'POST',
 						headers: {

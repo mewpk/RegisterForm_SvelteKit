@@ -12,7 +12,7 @@
 	</main>
 
 	<footer>
-		<p>visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit</p>
+		<p> Develop by <a href="https://kit.svelte.dev">mewpk</a></p>
 	</footer>
 </div>
 

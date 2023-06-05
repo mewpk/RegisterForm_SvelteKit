@@ -66,7 +66,7 @@
 	};
 </script>
 
-<main class="flex items-center justify-center min-h-screen bg-gray-100">
+<main class="flex items-center justify-center min-h-screen">
 	<div class="max-w-md w-full space-y-8 p-6 bg-white rounded-lg shadow-lg">
 		<h2 class="text-2xl font-bold text-center">Login</h2>
 

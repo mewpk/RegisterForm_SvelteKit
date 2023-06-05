@@ -69,20 +69,21 @@
   <div>
 	<ul>
 	  {#each elements as element, index}
-		<li class="mb-4" >
+		<li class="mb-4 " >
 		  <label for={element.label} class="font-bold mb-2">{element.label}:</label>
 		  <input type={element.elementType} class="w-full border border-gray-400 p-2 rounded-lg" id={element.id.toString()} />
 
 		  {#if element.editable}
 			<button
 			  type="button"
-			  class="ml-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+			  class="btn  bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg mt-4 ml-auto"
 			  on:click={() => {
 				label = element.label;
 				elementType = element.elementType;
 				modalOpen = true;
 				indexToEdit = index;
 			  }}
+			  
 			>
 			  Edit
 			</button>
@@ -108,7 +109,7 @@
 	  </select>
 	</div>
 
-	<button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" on:click={addElement}>Add Element</button>
+	<button type="button" class="btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg " on:click={addElement}>Add Element</button>
   </form>
 
   <div>
@@ -133,7 +134,7 @@
 			  </select>
 			</div>
 
-			<button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" on:click={() => editElement(indexToEdit)}>Save Changes</button>
+			<button type="button" class="btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg" on:click={() => editElement(indexToEdit)}>Save Changes</button>
 		  </form>
 		</div>
 	  </div>

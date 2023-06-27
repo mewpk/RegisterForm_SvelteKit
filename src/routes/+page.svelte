@@ -1,9 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
-	import axios from 'axios';
-  
-	let email = '';
-	let password = '';
+
 	let isLoggedIn = false;
   
 	async function login() {
@@ -64,9 +61,14 @@
   </script>
   
   <main class="flex flex-col h-screen justify-center items-center">
-	<!-- Only render the login button if the user is not logged in -->
+	<button class="py-2 px-4 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue" on:click={login}>Check!</button>
 	{#if !isLoggedIn}
 	  <button class="py-2 px-4 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue" on:click={login}>Login with Line</button>
+	{:else}
+	  <form>
+		<!-- Add your form fields here -->
+	  </form>
 	{/if}
   </main>
+  
   

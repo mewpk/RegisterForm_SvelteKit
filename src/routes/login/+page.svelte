@@ -21,6 +21,7 @@
 		script.async = true;
 		script.onload = () => {
 			// Initialize the Line SDK
+			// @ts-ignore
 			window.liff.init({ liffId: '1661230116-LkXrjd8N' });
 		};
 		document.body.appendChild(script);
@@ -28,6 +29,7 @@
 
 	const lineLogin = async () => {
 		try {
+			// @ts-ignore
 			const line = window.liff;
 			if (!line.isLoggedIn()) {
 				line.login();
@@ -43,7 +45,7 @@
 				};
 
 				const response = await fetch(
-					'https://3c22-2001-fb1-a1-c8d4-e9db-1d44-98ba-89e6.ngrok-free.app/Line',
+					'https://5afc-2001-fb1-a1-8604-7cd0-dcc1-6ff4-5bd7.ngrok-free.app/Line',
 					{
 						method: 'POST',
 						headers: {

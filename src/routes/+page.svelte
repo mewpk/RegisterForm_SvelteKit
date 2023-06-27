@@ -2,7 +2,10 @@
 	import { onMount } from 'svelte';
 
 	let isLoggedIn = false;
-  
+	/**
+	 * @type {{ userId: any; displayName: any; pictureUrl: any; statusMessage: any; }}
+	 */
+	let userProfile;
 	async function login() {
 	  try {
 		// @ts-ignore
@@ -10,7 +13,7 @@
 		if (!line.isLoggedIn()) {
 		  line.login();
 		} else {
-		  const userProfile = await line.getProfile();
+		  userProfile = await line.getProfile();
 		  // Save the user profile to the datasheet or perform any other action
 		  console.log(userProfile);
 		  const data = {
@@ -61,10 +64,13 @@
   </script>
   
   <main class="flex flex-col h-screen justify-center items-center">
-	<button class="py-2 px-4 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue" on:click={login}>Check!</button>
+	
 	{#if !isLoggedIn}
 	  <button class="py-2 px-4 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue" on:click={login}>Login with Line</button>
 	{:else}
+	<h1>
+		{userProfile.userId}
+	</h1>
 	  <form>
 		<!-- Add your form fields here -->
 	  </form>

@@ -1,4 +1,6 @@
 <script>
+	// @ts-nocheck
+
 	import { onMount } from 'svelte';
 
 	let isLoggedIn = false;
@@ -7,74 +9,159 @@
 	 */
 	let userProfile;
 	async function login() {
-	  try {
-		// @ts-ignore
-		const line = window.liff;
-		if (!line.isLoggedIn()) {
-		  line.login();
-		} else {
-		  userProfile = await line.getProfile();
-		  // Save the user profile to the datasheet or perform any other action
-		  console.log(userProfile);
-		  const data = {
-			userId: userProfile.userId,
-			displayName: userProfile.displayName,
-			pictureUrl: userProfile.pictureUrl,
-			statusMessage: userProfile.statusMessage
-		  };
-  
-		  const response = await fetch(
-			'https://5afc-2001-fb1-a1-8604-7cd0-dcc1-6ff4-5bd7.ngrok-free.app/Line',
-			{
-			  method: 'POST',
-			  headers: {
-				'Content-Type': 'application/json'
-			  },
-			  body: JSON.stringify(data)
+		try {
+			// @ts-ignore
+			const line = window.liff;
+			if (!line.isLoggedIn()) {
+				line.login();
+			} else {
+				userProfile = await line.getProfile();
+				// Save the user profile to the datasheet or perform any other action
+				console.log(userProfile);
+				const data = {
+					userId: userProfile.userId,
+					displayName: userProfile.displayName,
+					pictureUrl: userProfile.pictureUrl,
+					statusMessage: userProfile.statusMessage
+				};
+
+				const response = await fetch(
+					'https://5afc-2001-fb1-a1-8604-7cd0-dcc1-6ff4-5bd7.ngrok-free.app/Line',
+					{
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json'
+						},
+						body: JSON.stringify(data)
+					}
+				);
+
+				if (response.ok) {
+					const responseData = await response.json();
+					console.log(responseData);
+
+					// Update the isLoggedIn variable
+					isLoggedIn = true;
+				} else {
+					console.error('Request failed:', response.status);
+				}
 			}
-		  );
-  
-		  if (response.ok) {
-			const responseData = await response.json();
-			console.log(responseData);
-  
-			// Update the isLoggedIn variable
-			isLoggedIn = true;
-		  } else {
-			console.error('Request failed:', response.status);
-		  }
+		} catch (error) {
+			console.error(error);
 		}
-	  } catch (error) {
-		console.error(error);
-	  }
 	}
-  
+
 	onMount(async () => {
-	  // Load the Line SDK script asynchronously
-	  const script = document.createElement('script');
-	  script.src = 'https://static.line-scdn.net/liff/edge/2/sdk.js';
-	  script.async = true;
-	  script.onload = () => {
-		// Initialize the Line SDK
-		// @ts-ignore
-		window.liff.init({ liffId: '1661230116-LkXrjd8N' });
-	  };
-	  document.body.appendChild(script);
+		// Load the Line SDK script asynchronously
+		const script = document.createElement('script');
+		script.src = 'https://static.line-scdn.net/liff/edge/2/sdk.js';
+		script.async = true;
+		script.onload = () => {
+			// Initialize the Line SDK
+			// @ts-ignore
+			window.liff.init({ liffId: '1661230116-LkXrjd8N' });
+		};
+		document.body.appendChild(script);
 	});
-  </script>
-  
-  <main class="flex flex-col h-screen justify-center items-center">
-	
+
+	/**
+	 * @type {any[]}
+	 */
+	let tags = [];
+	let tagTypes = [
+		'checkbox',
+		'color',
+		'date',
+		'datetime-local',
+		'email',
+		'file',
+		'hidden',
+		'image',
+		'month',
+		'number',
+		'password',
+		'radio',
+		'range',
+		'reset',
+		'search',
+		'submit',
+		'tel',
+		'text',
+		'time',
+		'url',
+		'week'
+	];
+
+	let selectedTagType;
+
+	function addTag() {
+		const tagNameInput = document.getElementById('tag-name');
+		const tagRequired = document.getElementById('tag-required');
+		const newTag = {
+			name: tagNameInput.value,
+			type: selectedTagType,
+			required: tagRequired.checked
+		};
+		if (newTag.name) {
+			tags = [...tags, newTag];
+			tagNameInput.value = '';
+			selectedTagType = null;
+			tagRequired.checked = false;
+		}
+		console.log(tags);
+	}
+</script>
+
+<main class="container">
 	{#if !isLoggedIn}
-	  <button class="py-2 px-4 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue" on:click={login}>Login with Line</button>
+		<button
+			class="py-2 px-4 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue"
+			on:click={login}>Login with Line</button
+		>
 	{:else}
-	<h1>
-		{userProfile.userId}
-	</h1>
-	  <form>
-		<!-- Add your form fields here -->
-	  </form>
+		<h1>{userProfile.userId}</h1>
+		<form />
 	{/if}
-  </main>
-  
-  
+
+	{#if isLoggedIn}
+		{#if userProfile.userId === 'U033d432e31846b2f496d79ee85cb639a'}
+			<form>
+				<label for="tag-type" class="m-4">Tag Type:</label>
+				<select id="tag-type" bind:value={selectedTagType} class="p-2 border rounded-lg mt-1">
+					{#each tagTypes as tagType}
+						<option value={tagType}>{tagType}</option>
+					{/each}
+				</select>
+
+				<label for="tag-name" class="m-4">Tag Name:</label>
+				<input type="text" id="tag-name" class="p-2 border rounded-lg mt-1" />
+
+				<label for="tag-required" class="m-4">Tag Required:</label>
+				<input type="checkbox" id="tag-required" class="p-2 border rounded-lg mt-1" />
+
+				<div class="flex justify-end">
+					<button
+						on:click={addTag}
+						class="bg-gray-900 text-white py-2 px-4 rounded-lg mt-4 hover:bg-gray-700 focus:outline-none focus:shadow-outline-gray"
+						>Add Tag</button
+					>
+				</div>
+			</form>
+
+			{#if tags.length > 0}
+				{#each tags as tag}
+					<form>
+						<div class="flex flex-col mb-4">
+							<label for={tag.name}>{tag.name}</label>
+							{#if tag.require}
+								<input type={tag.type} required class="border border-gray-400 p-2 rounded-lg" />
+							{:else}
+								<input type={tag.type} class="border border-gray-400 p-2 rounded-lg" />
+							{/if}
+						</div>
+					</form>
+				{/each}
+			{/if}
+		{/if}
+	{/if}
+</main>

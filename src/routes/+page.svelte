@@ -112,56 +112,59 @@
 	}
 </script>
 
-<main class="container">
-	{#if !isLoggedIn}
+<main class="container mx-auto px-4 bg-slate-200 rounded-3xl bg-opacity-60">
+    {#if !isLoggedIn}
+	<div class="flex justify-center items-center h-screen">
 		<button
-			class="py-2 px-4 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue"
-			on:click={login}>Login with Line</button
-		>
-	{:else}
-		<h1>{userProfile.userId}</h1>
-		<form />
-	{/if}
+			class="py-4 px-10 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue font-bold"
+			on:click={login}>Login with Line</button>
+	</div>
+	
+    {:else}
+        <h1>{userProfile.userId}</h1>
+        <form />
+    {/if}
 
-	{#if isLoggedIn}
-		{#if userProfile.userId === 'U033d432e31846b2f496d79ee85cb639a'}
-			<form>
-				<label for="tag-type" class="m-4">Tag Type:</label>
-				<select id="tag-type" bind:value={selectedTagType} class="p-2 border rounded-lg mt-1">
-					{#each tagTypes as tagType}
-						<option value={tagType}>{tagType}</option>
-					{/each}
-				</select>
+    {#if isLoggedIn}
+        {#if userProfile.userId === 'U033d432e31846b2f496d79ee85cb639a'}
+            <form class="mt-8">
+                <label for="tag-type" class="m-4">Tag Type:</label>
+                <select id="tag-type" bind:value={selectedTagType} class="p-2 border rounded-lg mt-1">
+                    {#each tagTypes as tagType}
+                        <option value={tagType}>{tagType}</option>
+                    {/each}
+                </select>
 
-				<label for="tag-name" class="m-4">Tag Name:</label>
-				<input type="text" id="tag-name" class="p-2 border rounded-lg mt-1" />
+                <label for="tag-name" class="m-4">Tag Name:</label>
+                <input type="text" id="tag-name" class="p-2 border rounded-lg mt-1" />
 
-				<label for="tag-required" class="m-4">Tag Required:</label>
-				<input type="checkbox" id="tag-required" class="p-2 border rounded-lg mt-1" />
+                <label for="tag-required" class="m-4">Tag Required:</label>
+                <input type="checkbox" id="tag-required" class="p-2 border rounded-lg mt-1" />
 
-				<div class="flex justify-end">
-					<button
-						on:click={addTag}
-						class="bg-gray-900 text-white py-2 px-4 rounded-lg mt-4 hover:bg-gray-700 focus:outline-none focus:shadow-outline-gray"
-						>Add Tag</button
-					>
-				</div>
-			</form>
+                <div class="flex justify-end">
+                    <button
+                        on:click={addTag}
+                        class="bg-gray-900 text-white py-2 px-4 rounded-lg mt-4 hover:bg-gray-700 focus:outline-none focus:shadow-outline-gray"
+                        >Add Tag</button
+                    >
+                </div>
+            </form>
 
-			{#if tags.length > 0}
-				{#each tags as tag}
-					<form>
-						<div class="flex flex-col mb-4">
-							<label for={tag.name}>{tag.name}</label>
-							{#if tag.require}
-								<input type={tag.type} required class="border border-gray-400 p-2 rounded-lg" />
-							{:else}
-								<input type={tag.type} class="border border-gray-400 p-2 rounded-lg" />
-							{/if}
-						</div>
-					</form>
-				{/each}
-			{/if}
-		{/if}
-	{/if}
+            {#if tags.length > 0}
+                {#each tags as tag}
+                    <form class="mt-8">
+                        <div class="flex flex-col mb-4">
+                            {#if tag.require}
+                                <label for={tag.name} class="text-lg font-medium text-gray-900">{tag.name}</label>
+                                <input type={tag.type} required class="border border-gray-400 p-2 rounded-lg mt-2" />
+                            {:else}
+                                <label for={tag.name} class="text-lg font-medium text-gray-900">{tag.name}</label>
+                                <input type={tag.type} class="border border-gray-400 p-2 rounded-lg mt-2" />
+                            {/if}
+                        </div>
+                    </form>
+                {/each}
+            {/if}
+        {/if}
+    {/if}
 </main>

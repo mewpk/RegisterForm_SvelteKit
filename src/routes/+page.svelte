@@ -148,17 +148,19 @@
 		try {
 			const formValues = tags.map((tag) => ({ name: tag.name, value: tag.value }));
 			// Send the form data to the API endpoint
-			formValues.append({id : userProfile.id , date : Date.now()});
-			
+
 			console.log(JSON.stringify(formValues));
-			
-			const response = await fetch('https://d7a3-2001-fb1-a1-8604-c0b-1fae-e75b-79a0.ngrok-free.app/GoogleSheet', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify(formValues)
-			});
+
+			const response = await fetch(
+				'https://d7a3-2001-fb1-a1-8604-c0b-1fae-e75b-79a0.ngrok-free.app/GoogleSheet',
+				{
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify(formValues)
+				}
+			);
 
 			if (response.ok) {
 				const data = await response.json();
@@ -218,11 +220,9 @@
 
 			{#if tags.length > 0}
 				<form class="mt-8" on:submit|preventDefault={handleSubmit}>
-				
 					<div class="flex flex-col w-[80%] mx-auto">
 						{#each tags as tag}
-							{#if tag.type === 'checkbox' || tag.type === 'color' || tag.type === 'radio'}
-								<div class="flex mb-4">
+								<div class="flex mb-4 flex-col">
 									{#if tag.required}
 										<label for={tag.name} class="text-lg font-bold text-gray-900"
 											>{tag.name}:<span class="text-red-500 ml-2">*</span></label
@@ -241,6 +241,62 @@
 												bind:value={tag.value}
 												class="border border-gray-400 p-2 rounded-lg ml-2"
 											/>
+										{:else if tag.type === 'date'}
+											<input
+												type="date"
+												required
+												bind:value={tag.value}
+												class="border border-gray-400 p-2 rounded-lg ml-2"
+											/>
+										{:else if tag.type === 'datetime-local'}
+											<input
+												type="datetime-local"
+												required
+												bind:value={tag.value}
+												class="border border-gray-400 p-2 rounded-lg ml-2"
+											/>
+										{:else if tag.type === 'email'}
+											<input
+												type="email"
+												required
+												bind:value={tag.value}
+												class="border border-gray-400 p-2 rounded-lg ml-2"
+											/>
+										{:else if tag.type === 'file'}
+											<input
+												type="file"
+												required
+												bind:value={tag.value}
+												class="border border-gray-400 p-2 rounded-lg ml-2"
+											/>
+										{:else if tag.type === 'hidden'}
+											<input
+												type="hidden"
+												required
+												bind:value={tag.value}
+												class="border border-gray-400 p-2 rounded-lg ml-2"
+											/>
+										{:else if tag.type === 'month'}
+											<input
+												type="month"
+												required
+												bind:value={tag.value}
+												class="border border-gray-400 p-2 rounded-lg ml-2"
+											/>
+										{:else if tag.type === 'number'}
+											<input
+												type="number"
+												required
+												bind:value={tag.value}
+												class="border border-gray-400 p-2 rounded-lg ml-2"
+											/>
+										{:else if tag.type === 'password'}
+											<input
+												type="password"
+												required
+												bind:value={tag.value}
+												class="border border-gray-400 p-2 rounded-lg ml-2"
+											/>
 										{:else if tag.type === 'radio'}
 											<input
 												type="radio"
@@ -249,9 +305,65 @@
 												value={tag.name}
 												class="border border-gray-400 p-2 rounded-lg ml-2"
 											/>
-										{:else}
+										{:else if tag.type === 'range'}
+											<input
+												type="range"
+												required
+												bind:value={tag.value}
+												class="border border-gray-400 p-2 rounded-lg ml-2"
+											/>
+										{:else if tag.type === 'reset'}
+											<input
+												type="reset"
+												required
+												bind:value={tag.value}
+												class="border border-gray-400 p-2 rounded-lg ml-2"
+											/>
+										{:else if tag.type === 'search'}
+											<input
+												type="search"
+												required
+												bind:value={tag.value}
+												class="border border-gray-400 p-2 rounded-lg ml-2"
+											/>
+										{:else if tag.type === 'submit'}
+											<input
+												type="submit"
+												required
+												bind:value={tag.value}
+												class="border border-gray-400 p-2 rounded-lg ml-2"
+											/>
+										{:else if tag.type === 'tel'}
+											<input
+												type="tel"
+												required
+												bind:value={tag.value}
+												class="border border-gray-400 p-2 rounded-lg ml-2"
+											/>
+										{:else if tag.type === 'text'}
 											<input
 												type="text"
+												required
+												bind:value={tag.value}
+												class="border border-gray-400 p-2 rounded-lg ml-2"
+											/>
+										{:else if tag.type === 'time'}
+											<input
+												type="time"
+												required
+												bind:value={tag.value}
+												class="border border-gray-400 p-2 rounded-lg ml-2"
+											/>
+										{:else if tag.type === 'url'}
+											<input
+												type="url"
+												required
+												bind:value={tag.value}
+												class="border border-gray-400 p-2 rounded-lg ml-2"
+											/>
+										{:else if tag.type === 'week'}
+											<input
+												type="week"
 												required
 												bind:value={tag.value}
 												class="border border-gray-400 p-2 rounded-lg ml-2"
@@ -263,107 +375,129 @@
 										{#if tag.type === 'checkbox'}
 											<input
 												type="checkbox"
-												required
 												bind:group={tag.value}
 												class="border border-gray-400 p-2 rounded-lg ml-2"
 											/>
 										{:else if tag.type === 'color'}
 											<input
 												type="color"
-												required
+												bind:value={tag.value}
+												class="border border-gray-400 p-2 rounded-lg ml-2"
+											/>
+										{:else if tag.type === 'date'}
+											<input
+												type="date"
+												bind:value={tag.value}
+												class="border border-gray-400 p-2 rounded-lg ml-2"
+											/>
+										{:else if tag.type === 'datetime-local'}
+											<input
+												type="datetime-local"
+												bind:value={tag.value}
+												class="border border-gray-400 p-2 rounded-lg ml-2"
+											/>
+										{:else if tag.type === 'email'}
+											<input
+												type="email"
+												bind:value={tag.value}
+												class="border border-gray-400 p-2 rounded-lg ml-2"
+											/>
+										{:else if tag.type === 'file'}
+											<input
+												type="file"
+												bind:value={tag.value}
+												class="border border-gray-400 p-2 rounded-lg ml-2"
+											/>
+										{:else if tag.type === 'hidden'}
+											<input
+												type="hidden"
+												bind:value={tag.value}
+												class="border border-gray-400 p-2 rounded-lg ml-2"
+											/>
+									
+										{:else if tag.type === 'month'}
+											<input
+												type="month"
+												bind:value={tag.value}
+												class="border border-gray-400 p-2 rounded-lg ml-2"
+											/>
+										{:else if tag.type === 'number'}
+											<input
+												type="number"
+												bind:value={tag.value}
+												class="border border-gray-400 p-2 rounded-lg ml-2"
+											/>
+										{:else if tag.type === 'password'}
+											<input
+												type="password"
 												bind:value={tag.value}
 												class="border border-gray-400 p-2 rounded-lg ml-2"
 											/>
 										{:else if tag.type === 'radio'}
 											<input
 												type="radio"
-												required
 												bind:group={tag.value}
 												value={tag.name}
 												class="border border-gray-400 p-2 rounded-lg ml-2"
 											/>
-										{:else}
+										{:else if tag.type === 'range'}
+											<input
+												type="range"
+												bind:value={tag.value}
+												class="border border-gray-400 p-2 rounded-lg ml-2"
+											/>
+										{:else if tag.type === 'reset'}
+											<input
+												type="reset"
+												bind:value={tag.value}
+												class="border border-gray-400 p-2 rounded-lg ml-2"
+											/>
+										{:else if tag.type === 'search'}
+											<input
+												type="search"
+												bind:value={tag.value}
+												class="border border-gray-400 p-2 rounded-lg ml-2"
+											/>
+										{:else if tag.type === 'submit'}
+											<input
+												type="submit"
+												bind:value={tag.value}
+												class="border border-gray-400 p-2 rounded-lg ml-2"
+											/>
+										{:else if tag.type === 'tel'}
+											<input
+												type="tel"
+												bind:value={tag.value}
+												class="border border-gray-400 p-2 rounded-lg ml-2"
+											/>
+										{:else if tag.type === 'text'}
 											<input
 												type="text"
-												required
+												bind:value={tag.value}
+												class="border border-gray-400 p-2 rounded-lg ml-2"
+											/>
+										{:else if tag.type === 'time'}
+											<input
+												type="time"
+												bind:value={tag.value}
+												class="border border-gray-400 p-2 rounded-lg ml-2"
+											/>
+										{:else if tag.type === 'url'}
+											<input
+												type="url"
+												bind:value={tag.value}
+												class="border border-gray-400 p-2 rounded-lg ml-2"
+											/>
+										{:else if tag.type === 'week'}
+											<input
+												type="week"
 												bind:value={tag.value}
 												class="border border-gray-400 p-2 rounded-lg ml-2"
 											/>
 										{/if}
 									{/if}
 								</div>
-							{:else}
-								<div class="flex flex-col mb-4">
-									{#if tag.required}
-										<label for={tag.name} class="text-lg font-bold text-gray-900"
-											>{tag.name}:<span class="text-red-500 ml-2">*</span></label
-										>
-										{#if tag.type === 'checkbox'}
-											<input
-												type="checkbox"
-												required
-												bind:group={tag.value}
-												class="border border-gray-400 p-2 rounded-lg ml-2"
-											/>
-										{:else if tag.type === 'color'}
-											<input
-												type="color"
-												required
-												bind:value={tag.value}
-												class="border border-gray-400 p-2 rounded-lg ml-2"
-											/>
-										{:else if tag.type === 'radio'}
-											<input
-												type="radio"
-												required
-												bind:group={tag.value}
-												value={tag.name}
-												class="border border-gray-400 p-2 rounded-lg ml-2"
-											/>
-										{:else}
-											<input
-												type="text"
-												required
-												bind:value={tag.value}
-												class="border border-gray-400 p-2 rounded-lg ml-2"
-											/>
-										{/if}
-									{:else}
-										<label for={tag.name} class="text-lg font-bold text-gray-900">{tag.name}:</label
-										>
-										{#if tag.type === 'checkbox'}
-											<input
-												type="checkbox"
-												required
-												bind:group={tag.value}
-												class="border border-gray-400 p-2 rounded-lg ml-2"
-											/>
-										{:else if tag.type === 'color'}
-											<input
-												type="color"
-												required
-												bind:value={tag.value}
-												class="border border-gray-400 p-2 rounded-lg ml-2"
-											/>
-										{:else if tag.type === 'radio'}
-											<input
-												type="radio"
-												required
-												bind:group={tag.value}
-												value={tag.name}
-												class="border border-gray-400 p-2 rounded-lg ml-2"
-											/>
-										{:else}
-											<input
-												type="text"
-												required
-												bind:value={tag.value}
-												class="border border-gray-400 p-2 rounded-lg ml-2"
-											/>
-										{/if}
-									{/if}
-								</div>
-							{/if}
+							
 						{/each}
 						<input
 							type="submit"

@@ -75,6 +75,18 @@
 		} catch (error) {
 			console.error(error);
 		}
+		try {
+			const response = await fetch(
+				'https://d7a3-2001-fb1-a1-8604-c0b-1fae-e75b-79a0.ngrok-free.app/Tags'
+			);
+			if (response.ok) {
+				tags = await response.json();
+			} else {
+				console.error('Error:', response.status);
+			}
+		} catch (error) {
+			console.error('Error:', error.message);
+		}
 	}
 
 	onMount(async () => {
@@ -88,18 +100,7 @@
 			window.liff.init({ liffId: '1661230116-LkXrjd8N' });
 		};
 		document.body.appendChild(script);
-		try {
-			const response = await fetch(
-				'https://d7a3-2001-fb1-a1-8604-c0b-1fae-e75b-79a0.ngrok-free.app/Tags'
-			);
-			if (response.ok) {
-				tags = await response.json();
-			} else {
-				console.error('Error:', response.status);
-			}
-		} catch (error) {
-			console.error('Error:', error.message);
-		}
+		
 	});
 
 	function addTag() {

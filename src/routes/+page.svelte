@@ -143,6 +143,35 @@
 			console.error('Error:', error.message);
 		}
 	}
+
+	async function handleSubmit() {
+		try {
+			const formValues = tags.map((tag) => ({ name: tag.name, value: tag.value }));
+
+			// Send the form data to the API endpoint
+
+			console.log(JSON.stringify(formValues));
+			
+			const response = await fetch('https://example.com/api/endpoint', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(formValues)
+			});
+
+			if (response.ok) {
+				const data = await response.json();
+				console.log('Response from API:', data);
+				// Do something with the response from the API
+			} else {
+				throw new Error('API request failed');
+			}
+		} catch (error) {
+			console.error('Error:', error);
+			// Handle any errors that occur during the API call
+		}
+	}
 </script>
 
 <main class="container mx-auto px-4 bg-slate-200 rounded-3xl bg-opacity-60 min-h-screen py-4">
@@ -188,43 +217,149 @@
 			</form>
 
 			{#if tags.length > 0}
-				<form class="mt-8">
+				<form class="mt-8" on:submit|preventDefault={handleSubmit}>
 					<div class="flex flex-col w-[80%] mx-auto">
 						{#each tags as tag}
-							{#if tag.type === 'checkbox' || tag.type === "color" || tag.type === "radio" }
+							{#if tag.type === 'checkbox' || tag.type === 'color' || tag.type === 'radio'}
 								<div class="flex mb-4">
 									{#if tag.required}
-										<label for={tag.name} class=" text-lg font-bold text-gray-900"
+										<label for={tag.name} class="text-lg font-bold text-gray-900"
 											>{tag.name}:<span class="text-red-500 ml-2">*</span></label
 										>
-										<input
-											type={tag.type}
-											required
-											class="border border-gray-400 p-2 rounded-lg ml-2"
-										/>
+										{#if tag.type === 'checkbox'}
+											<input
+												type="checkbox"
+												required
+												bind:group={tag.value}
+												class="border border-gray-400 p-2 rounded-lg ml-2"
+											/>
+										{:else if tag.type === 'color'}
+											<input
+												type="color"
+												required
+												bind:value={tag.value}
+												class="border border-gray-400 p-2 rounded-lg ml-2"
+											/>
+										{:else if tag.type === 'radio'}
+											<input
+												type="radio"
+												required
+												bind:group={tag.value}
+												value={tag.name}
+												class="border border-gray-400 p-2 rounded-lg ml-2"
+											/>
+										{:else}
+											<input
+												type="text"
+												required
+												bind:value={tag.value}
+												class="border border-gray-400 p-2 rounded-lg ml-2"
+											/>
+										{/if}
 									{:else}
 										<label for={tag.name} class="text-lg font-bold text-gray-900">{tag.name}:</label
 										>
-
-										<input type={tag.type} class="border border-gray-400 p-2 rounded-lg mt-2" />
+										{#if tag.type === 'checkbox'}
+											<input
+												type="checkbox"
+												required
+												bind:group={tag.value}
+												class="border border-gray-400 p-2 rounded-lg ml-2"
+											/>
+										{:else if tag.type === 'color'}
+											<input
+												type="color"
+												required
+												bind:value={tag.value}
+												class="border border-gray-400 p-2 rounded-lg ml-2"
+											/>
+										{:else if tag.type === 'radio'}
+											<input
+												type="radio"
+												required
+												bind:group={tag.value}
+												value={tag.name}
+												class="border border-gray-400 p-2 rounded-lg ml-2"
+											/>
+										{:else}
+											<input
+												type="text"
+												required
+												bind:value={tag.value}
+												class="border border-gray-400 p-2 rounded-lg ml-2"
+											/>
+										{/if}
 									{/if}
 								</div>
 							{:else}
 								<div class="flex flex-col mb-4">
 									{#if tag.required}
-										<label for={tag.name} class=" text-lg font-bold text-gray-900"
+										<label for={tag.name} class="text-lg font-bold text-gray-900"
 											>{tag.name}:<span class="text-red-500 ml-2">*</span></label
 										>
-										<input
-											type={tag.type}
-											required
-											class="border border-gray-400 p-2 rounded-lg mt-2"
-										/>
+										{#if tag.type === 'checkbox'}
+											<input
+												type="checkbox"
+												required
+												bind:group={tag.value}
+												class="border border-gray-400 p-2 rounded-lg ml-2"
+											/>
+										{:else if tag.type === 'color'}
+											<input
+												type="color"
+												required
+												bind:value={tag.value}
+												class="border border-gray-400 p-2 rounded-lg ml-2"
+											/>
+										{:else if tag.type === 'radio'}
+											<input
+												type="radio"
+												required
+												bind:group={tag.value}
+												value={tag.name}
+												class="border border-gray-400 p-2 rounded-lg ml-2"
+											/>
+										{:else}
+											<input
+												type="text"
+												required
+												bind:value={tag.value}
+												class="border border-gray-400 p-2 rounded-lg ml-2"
+											/>
+										{/if}
 									{:else}
 										<label for={tag.name} class="text-lg font-bold text-gray-900">{tag.name}:</label
 										>
-
-										<input type={tag.type} class="border border-gray-400 p-2 rounded-lg mt-2" />
+										{#if tag.type === 'checkbox'}
+											<input
+												type="checkbox"
+												required
+												bind:group={tag.value}
+												class="border border-gray-400 p-2 rounded-lg ml-2"
+											/>
+										{:else if tag.type === 'color'}
+											<input
+												type="color"
+												required
+												bind:value={tag.value}
+												class="border border-gray-400 p-2 rounded-lg ml-2"
+											/>
+										{:else if tag.type === 'radio'}
+											<input
+												type="radio"
+												required
+												bind:group={tag.value}
+												value={tag.name}
+												class="border border-gray-400 p-2 rounded-lg ml-2"
+											/>
+										{:else}
+											<input
+												type="text"
+												required
+												bind:value={tag.value}
+												class="border border-gray-400 p-2 rounded-lg ml-2"
+											/>
+										{/if}
 									{/if}
 								</div>
 							{/if}

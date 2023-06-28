@@ -81,6 +81,7 @@
 			);
 			if (response.ok) {
 				tags = await response.json();
+				console.log(tags);
 			} else {
 				console.error('Error:', response.status);
 			}

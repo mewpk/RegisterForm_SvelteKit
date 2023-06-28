@@ -102,10 +102,9 @@
 			window.liff.init({ liffId: '1661230116-LkXrjd8N' });
 		};
 		document.body.appendChild(script);
-		
 	});
 
-	async function  addTag() {
+	async function addTag() {
 		const tagNameInput = document.getElementById('tag-name');
 		const tagRequired = document.getElementById('tag-required');
 		const newTag = {
@@ -121,27 +120,25 @@
 		}
 		console.log(tags);
 
-		
 		try {
 			const data = tags;
-				const response = await fetch(
-					'https://d7a3-2001-fb1-a1-8604-c0b-1fae-e75b-79a0.ngrok-free.app/Tags',
-					{
-						method: 'POST',
-						headers: {
-							'Content-Type': 'application/json'
-						},
-						body: JSON.stringify(data)
-					}
-				);
-
-				if (response.ok) {
-					const responseData = await response.json();
-					console.log(responseData);
-				} else {
-					console.error('Request failed:', response.status);
+			const response = await fetch(
+				'https://d7a3-2001-fb1-a1-8604-c0b-1fae-e75b-79a0.ngrok-free.app/Tags',
+				{
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify(data)
 				}
-			
+			);
+
+			if (response.ok) {
+				const responseData = await response.json();
+				console.log(responseData);
+			} else {
+				console.error('Request failed:', response.status);
+			}
 		} catch (error) {
 			console.error('Error:', error.message);
 		}
@@ -163,52 +160,56 @@
 	{#if isLoggedIn}
 		{#if userProfile.userId === 'U033d432e31846b2f496d79ee85cb639a'}
 			<form class="mt-8">
-				<label for="tag-type" class="m-4">Tag Type:</label>
+				<label for="tag-type" class="m-4 font-bold">Tag Type:</label>
 				<select id="tag-type" bind:value={selectedTagType} class="p-2 border rounded-lg mt-1">
 					{#each tagTypes as tagType}
 						<option value={tagType}>{tagType}</option>
 					{/each}
 				</select>
 
-				<label for="tag-name" class="m-4">Tag Name:</label>
+				<label for="tag-name" class="m-4 font-bold">Tag Name:</label>
 				<input type="text" id="tag-name" class="p-2 border rounded-lg mt-1" />
 
-				<label for="tag-required" class="m-4">Tag Required:</label>
+				<label for="tag-required" class="m-4 font-bold">Tag Required:</label>
 				<input type="checkbox" id="tag-required" class="p-2 border rounded-lg mt-1" />
 
 				<div class="flex justify-end">
 					<button
 						on:click={addTag}
-						class="bg-gray-900 text-white py-2 px-4 rounded-lg mt-4 hover:bg-gray-700 focus:outline-none focus:shadow-outline-gray"
+						class="bg-gray-900 font-bold text-white py-2 px-4 rounded-lg mt-4 hover:bg-gray-700 focus:outline-none focus:shadow-outline-gray"
 						>Add Tag</button
 					>
 				</div>
 			</form>
 
 			{#if tags.length > 0}
-			<form class="mt-8">
-				{#each tags as tag}
-						<div class="flex flex-col mb-4">
-						{#if tag.required}
-							<label for={tag.name} class="text-lg font-medium text-gray-900">{tag.name}<span class="text-red-500">*</span></label>
-							<input
-								type={tag.type}
-								required
-								class="border border-gray-400 p-2 rounded-lg mt-2"
-							/>
-						{:else}
-							<label for={tag.name} class="text-lg font-medium text-gray-900">{tag.name}</label>
-							
-							<input type={tag.type} class="border border-gray-400 p-2 rounded-lg mt-2" />
-						{/if}
-						
-						</div>
+				<form class="mt-8">
+					<div class="flex flex-col w-[80%]">
+						{#each tags as tag}
+							<div class="mb-4">
+								{#if tag.required}
+									<label for={tag.name} class=" text-lg font-bold text-gray-900"
+										>{tag.name}<span class="text-red-500 ml-4">*</span></label
+									>
+									<input
+										type={tag.type}
+										required
+										class="border border-gray-400 p-2 rounded-lg mt-2"
+									/>
+								{:else}
+									<label for={tag.name} class="text-lg font-bold text-gray-900">{tag.name}</label>
+
+									<input type={tag.type} class="border border-gray-400 p-2 rounded-lg mt-2" />
+								{/if}
+							</div>
 						{/each}
-						<input type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-					</form>
+						<input
+							type="submit"
+							class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+						/>
+					</div>
+				</form>
 			{/if}
 		{/if}
 	{/if}
-	
-
 </main>

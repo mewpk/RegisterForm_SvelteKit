@@ -146,7 +146,8 @@
 
 	async function handleSubmit() {
 		try {
-			const formValues = tags.map((tag) => ({ name: tag.name, value: tag.value }));
+			const formValues = tags.map((tag) => ({  id: userProfile.userId, name: tag.name, value: tag.value }));
+
 			// Send the form data to the API endpoint
 
 			console.log(JSON.stringify(formValues));

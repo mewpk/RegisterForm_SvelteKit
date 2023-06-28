@@ -191,7 +191,7 @@
 				<form class="mt-8">
 					<div class="flex flex-col w-[80%] mx-auto">
 						{#each tags as tag}
-							{#if tag.type === 'checkbox'}
+							{#if tag.type === 'checkbox' || tag.type === "color" || tag.type === "radio" }
 								<div class="flex mb-4">
 									{#if tag.required}
 										<label for={tag.name} class=" text-lg font-bold text-gray-900"

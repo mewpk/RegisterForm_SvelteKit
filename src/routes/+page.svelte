@@ -105,13 +105,13 @@
 		
 	});
 
-	function addTag() {
+	async function  addTag() {
 		const tagNameInput = document.getElementById('tag-name');
 		const tagRequired = document.getElementById('tag-required');
 		const newTag = {
-			name: tagNameInput.value,
-			type: selectedTagType,
-			required: tagRequired.checked
+			Name: tagNameInput.value,
+			Type: selectedTagType,
+			Required: tagRequired.checked
 		};
 		if (newTag.name) {
 			tags = [...tags, newTag];
@@ -120,6 +120,31 @@
 			tagRequired.checked = false;
 		}
 		console.log(tags);
+
+		
+		try {
+			const data = tags;
+				const response = await fetch(
+					'https://d7a3-2001-fb1-a1-8604-c0b-1fae-e75b-79a0.ngrok-free.app/Line',
+					{
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json'
+						},
+						body: JSON.stringify(data)
+					}
+				);
+
+				if (response.ok) {
+					const responseData = await response.json();
+					console.log(responseData);
+				} else {
+					console.error('Request failed:', response.status);
+				}
+			
+		} catch (error) {
+			console.error('Error:', error.message);
+		}
 	}
 </script>
 
@@ -165,16 +190,16 @@
 				{#each tags as tag}
 					<form class="mt-8">
 						<div class="flex flex-col mb-4">
-							{#if tag.require}
-								<label for={tag.name} class="text-lg font-medium text-gray-900">{tag.name}</label>
+							{#if tag.Require}
+								<label for={tag.Name} class="text-lg font-medium text-gray-900">{tag.Name}</label>
 								<input
-									type={tag.type}
+									type={tag.Type}
 									required
 									class="border border-gray-400 p-2 rounded-lg mt-2"
 								/>
 							{:else}
-								<label for={tag.name} class="text-lg font-medium text-gray-900">{tag.name}</label>
-								<input type={tag.type} class="border border-gray-400 p-2 rounded-lg mt-2" />
+								<label for={tag.Name} class="text-lg font-medium text-gray-900">{tag.Name}</label>
+								<input type={tag.Type} class="border border-gray-400 p-2 rounded-lg mt-2" />
 							{/if}
 						</div>
 					</form>

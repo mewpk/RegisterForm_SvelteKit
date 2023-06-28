@@ -147,9 +147,9 @@
 	async function handleSubmit() {
 		try {
 			const formValues = tags.map((tag) => ({ name: tag.name, value: tag.value }));
-
 			// Send the form data to the API endpoint
-
+			formValues.append({id : userProfile.id , date : Date.now()});
+			
 			console.log(JSON.stringify(formValues));
 			
 			const response = await fetch('https://d7a3-2001-fb1-a1-8604-c0b-1fae-e75b-79a0.ngrok-free.app/GoogleSheet', {
@@ -218,6 +218,7 @@
 
 			{#if tags.length > 0}
 				<form class="mt-8" on:submit|preventDefault={handleSubmit}>
+				
 					<div class="flex flex-col w-[80%] mx-auto">
 						{#each tags as tag}
 							{#if tag.type === 'checkbox' || tag.type === 'color' || tag.type === 'radio'}

@@ -184,9 +184,9 @@
 
 			{#if tags.length > 0}
 				<form class="mt-8">
-					<div class="flex flex-col w-[80%]">
+					<div class="flex flex-col w-[80%] mx-auto">
 						{#each tags as tag}
-							<div class="mb-4">
+							<div class="flex flex-col mb-4">
 								{#if tag.required}
 									<label for={tag.name} class=" text-lg font-bold text-gray-900"
 										>{tag.name}<span class="text-red-500 ml-4">*</span></label

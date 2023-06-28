@@ -189,7 +189,7 @@
 			<form class="mt-8">
 				{#each tags as tag}
 						<div class="flex flex-col mb-4">
-							{#if tag.require}
+						{#if tag.required}
 							<label for={tag.name} class="text-lg font-medium text-gray-900">{tag.name}<span class="text-red-500">*</span></label>
 							<input
 								type={tag.type}

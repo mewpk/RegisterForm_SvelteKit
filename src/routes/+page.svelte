@@ -147,7 +147,7 @@
 
 <main class="container mx-auto px-4 bg-slate-200 rounded-3xl bg-opacity-60 min-h-screen py-4">
 	{#if !isLoggedIn}
-		<div class="flex justify-center items-center h-screen ">
+		<div class="flex justify-center items-center h-screen">
 			<button
 				class="py-4 px-10 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue font-bold"
 				on:click={login}>Login with Line</button
@@ -161,53 +161,73 @@
 		{#if userProfile.userId === 'U033d432e31846b2f496d79ee85cb639a'}
 			<form class="mt-8">
 				<div class="flex flex-col w-[80%] mx-auto">
-
 					<div class="flex flex-col mb-4">
-				<label for="tag-type" class="m-4 font-bold">Tag Type:</label>
-				<select id="tag-type" bind:value={selectedTagType} class="p-2 border rounded-lg mt-1">
-					{#each tagTypes as tagType}
-						<option value={tagType}>{tagType}</option>
-					{/each}
-				</select>
-			</div>
-			<div class="flex flex-col mb-4">
-				<label for="tag-name" class="m-4 font-bold">Tag Name:</label>
-				<input type="text" id="tag-name" class="p-2 border rounded-lg mt-1" />
-			</div>
-			<div class="flex flex-col mb-4">
-				<label for="tag-required" class="m-4 font-bold">Tag Required:</label>
-				<input type="checkbox" id="tag-required" class="p-2 border rounded-lg mt-1" />
-			</div>
-				<div class="flex justify-end">
-					<button
-						on:click={addTag}
-						class="bg-gray-900 font-bold text-white py-2 px-4 rounded-lg mt-4 hover:bg-gray-700 focus:outline-none focus:shadow-outline-gray"
-						>Add Tag</button
-					>
+						<label for="tag-type" class="m-4 font-bold">Tag Type:</label>
+						<select id="tag-type" bind:value={selectedTagType} class="p-2 border rounded-lg mt-1">
+							{#each tagTypes as tagType}
+								<option value={tagType}>{tagType}</option>
+							{/each}
+						</select>
+					</div>
+					<div class="flex flex-col mb-4">
+						<label for="tag-name" class="m-4 font-bold">Tag Name:</label>
+						<input type="text" id="tag-name" class="p-2 border rounded-lg mt-1" />
+					</div>
+					<div class="flex mb-4">
+						<label for="tag-required" class="m-4 font-bold">Tag Required : </label>
+						<input type="checkbox" id="tag-required" class="p-2 border rounded-lg mt-1" />
+					</div>
+					<div class="flex justify-end">
+						<button
+							on:click={addTag}
+							class="bg-gray-900 font-bold text-white py-2 px-4 rounded-lg mt-4 hover:bg-gray-700 focus:outline-none focus:shadow-outline-gray"
+							>Add Tag</button
+						>
+					</div>
 				</div>
-			</div>
 			</form>
 
 			{#if tags.length > 0}
 				<form class="mt-8">
 					<div class="flex flex-col w-[80%] mx-auto">
 						{#each tags as tag}
-							<div class="flex flex-col mb-4">
-								{#if tag.required}
-									<label for={tag.name} class=" text-lg font-bold text-gray-900"
-										>{tag.name}<span class="text-red-500 ml-4">*</span></label
-									>
-									<input
-										type={tag.type}
-										required
-										class="border border-gray-400 p-2 rounded-lg mt-2"
-									/>
-								{:else}
-									<label for={tag.name} class="text-lg font-bold text-gray-900">{tag.name}</label>
+							{#if tag.type === 'checkbox'}
+								<div class="flex mb-4">
+									{#if tag.required}
+										<label for={tag.name} class=" text-lg font-bold text-gray-900"
+											>{tag.name}:<span class="text-red-500 ml-2">*</span></label
+										>
+										<input
+											type={tag.type}
+											required
+											class="border border-gray-400 p-2 rounded-lg ml-2"
+										/>
+									{:else}
+										<label for={tag.name} class="text-lg font-bold text-gray-900">{tag.name}:</label
+										>
 
-									<input type={tag.type} class="border border-gray-400 p-2 rounded-lg mt-2" />
-								{/if}
-							</div>
+										<input type={tag.type} class="border border-gray-400 p-2 rounded-lg mt-2" />
+									{/if}
+								</div>
+							{:else}
+								<div class="flex flex-col mb-4">
+									{#if tag.required}
+										<label for={tag.name} class=" text-lg font-bold text-gray-900"
+											>{tag.name}:<span class="text-red-500 ml-2">*</span></label
+										>
+										<input
+											type={tag.type}
+											required
+											class="border border-gray-400 p-2 rounded-lg mt-2"
+										/>
+									{:else}
+										<label for={tag.name} class="text-lg font-bold text-gray-900">{tag.name}:</label
+										>
+
+										<input type={tag.type} class="border border-gray-400 p-2 rounded-lg mt-2" />
+									{/if}
+								</div>
+							{/if}
 						{/each}
 						<input
 							type="submit"

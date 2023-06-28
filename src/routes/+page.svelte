@@ -125,7 +125,7 @@
 		try {
 			const data = tags;
 				const response = await fetch(
-					'https://d7a3-2001-fb1-a1-8604-c0b-1fae-e75b-79a0.ngrok-free.app/Line',
+					'https://d7a3-2001-fb1-a1-8604-c0b-1fae-e75b-79a0.ngrok-free.app/Tags',
 					{
 						method: 'POST',
 						headers: {

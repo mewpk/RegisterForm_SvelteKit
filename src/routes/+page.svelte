@@ -186,8 +186,8 @@
 			</form>
 
 			{#if tags.length > 0}
+			<form class="mt-8">
 				{#each tags as tag}
-					<form class="mt-8">
 						<div class="flex flex-col mb-4">
 							{#if tag.require}
 								<label for={tag.name} class="text-lg font-medium text-gray-900">{tag.name}</label>
@@ -202,9 +202,9 @@
 								<input type={tag.type} class="border border-gray-400 p-2 rounded-lg mt-2" />
 							{/if}
 						</div>
+						{/each}
 						<input type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
 					</form>
-				{/each}
 			{/if}
 		{/if}
 	{/if}

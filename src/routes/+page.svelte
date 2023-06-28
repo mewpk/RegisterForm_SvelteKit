@@ -80,7 +80,8 @@
 				'https://d7a3-2001-fb1-a1-8604-c0b-1fae-e75b-79a0.ngrok-free.app/Tags'
 			);
 			if (response.ok) {
-				tags = await response.json();
+				res = await response.json();
+				tags = res.data;
 				console.log(tags);
 			} else {
 				console.error('Error:', response.status);

@@ -160,19 +160,24 @@
 	{#if isLoggedIn}
 		{#if userProfile.userId === 'U033d432e31846b2f496d79ee85cb639a'}
 			<form class="mt-8">
+				<div class="flex flex-col w-[80%] mx-auto">
+
+					<div class="flex flex-col mb-4">
 				<label for="tag-type" class="m-4 font-bold">Tag Type:</label>
 				<select id="tag-type" bind:value={selectedTagType} class="p-2 border rounded-lg mt-1">
 					{#each tagTypes as tagType}
 						<option value={tagType}>{tagType}</option>
 					{/each}
 				</select>
-
+			</div>
+			<div class="flex flex-col mb-4">
 				<label for="tag-name" class="m-4 font-bold">Tag Name:</label>
 				<input type="text" id="tag-name" class="p-2 border rounded-lg mt-1" />
-
+			</div>
+			<div class="flex flex-col mb-4">
 				<label for="tag-required" class="m-4 font-bold">Tag Required:</label>
 				<input type="checkbox" id="tag-required" class="p-2 border rounded-lg mt-1" />
-
+			</div>
 				<div class="flex justify-end">
 					<button
 						on:click={addTag}
@@ -180,6 +185,7 @@
 						>Add Tag</button
 					>
 				</div>
+			</div>
 			</form>
 
 			{#if tags.length > 0}

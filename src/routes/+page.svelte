@@ -158,7 +158,6 @@
 		</div>
 	{:else}
 		<h1>{userProfile.userId}</h1>
-		<form />
 	{/if}
 
 	{#if isLoggedIn}
@@ -199,12 +198,16 @@
 								/>
 							{:else}
 								<label for={tag.name} class="text-lg font-medium text-gray-900">{tag.name}</label>
+							
 								<input type={tag.type} class="border border-gray-400 p-2 rounded-lg mt-2" />
 							{/if}
 						</div>
+						<input type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
 					</form>
 				{/each}
 			{/if}
 		{/if}
 	{/if}
+	
+
 </main>

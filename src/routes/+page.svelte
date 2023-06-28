@@ -145,9 +145,9 @@
 	}
 </script>
 
-<main class="container mx-auto px-4 bg-slate-200 rounded-3xl bg-opacity-60">
+<main class="container mx-auto px-4 bg-slate-200 rounded-3xl bg-opacity-60 min-h-screen py-4">
 	{#if !isLoggedIn}
-		<div class="flex justify-center items-center h-screen">
+		<div class="flex justify-center items-center h-screen ">
 			<button
 				class="py-4 px-10 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue font-bold"
 				on:click={login}>Login with Line</button

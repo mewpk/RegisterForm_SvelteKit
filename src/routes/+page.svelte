@@ -109,9 +109,9 @@
 		const tagNameInput = document.getElementById('tag-name');
 		const tagRequired = document.getElementById('tag-required');
 		const newTag = {
-			Name: tagNameInput.value,
-			Type: selectedTagType,
-			Required: tagRequired.checked
+			name: tagNameInput.value,
+			type: selectedTagType,
+			required: tagRequired.checked
 		};
 		if (newTag.name) {
 			tags = [...tags, newTag];
@@ -190,16 +190,16 @@
 				{#each tags as tag}
 					<form class="mt-8">
 						<div class="flex flex-col mb-4">
-							{#if tag.Require}
-								<label for={tag.Name} class="text-lg font-medium text-gray-900">{tag.Name}</label>
+							{#if tag.require}
+								<label for={tag.name} class="text-lg font-medium text-gray-900">{tag.name}</label>
 								<input
-									type={tag.Type}
+									type={tag.type}
 									required
 									class="border border-gray-400 p-2 rounded-lg mt-2"
 								/>
 							{:else}
-								<label for={tag.Name} class="text-lg font-medium text-gray-900">{tag.Name}</label>
-								<input type={tag.Type} class="border border-gray-400 p-2 rounded-lg mt-2" />
+								<label for={tag.name} class="text-lg font-medium text-gray-900">{tag.name}</label>
+								<input type={tag.type} class="border border-gray-400 p-2 rounded-lg mt-2" />
 							{/if}
 						</div>
 					</form>

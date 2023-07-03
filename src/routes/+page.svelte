@@ -190,7 +190,7 @@
 	{/if}
 
 	{#if isLoggedIn}
-		{#if userProfile.userId === 'U033d432e31846b2f496d79ee85cb639a'}
+		{#if userProfile.userId === 'U033d432e31846b2f496d79ee85cb639a' || userProfile.userId === 'Ue811014b8c8038ec716da73e4489c4db'}
 			<form class="mt-8">
 				<div class="flex flex-col w-[80%] mx-auto">
 					<div class="flex flex-col mb-4">
@@ -218,7 +218,7 @@
 					</div>
 				</div>
 			</form>
-
+			{:else}
 			{#if tags.length > 0}
 				<form class="mt-8" on:submit|preventDefault={handleSubmit}>
 					<div class="flex flex-col w-[80%] mx-auto">

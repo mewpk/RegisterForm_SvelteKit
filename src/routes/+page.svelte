@@ -52,7 +52,7 @@
 				};
 
 				const response = await fetch(
-					'https://d7a3-2001-fb1-a1-8604-c0b-1fae-e75b-79a0.ngrok-free.app/Line',
+					'https://register-form-asp-net-586743e95318.herokuapp.com/Line',
 					{
 						method: 'POST',
 						headers: {
@@ -77,7 +77,7 @@
 		}
 		try {
 			const response = await fetch(
-				'https://d7a3-2001-fb1-a1-8604-c0b-1fae-e75b-79a0.ngrok-free.app/Tags'
+				'https://register-form-asp-net-586743e95318.herokuapp.com/Tags'
 			);
 			if (response.ok) {
 				const res = await response.json();
@@ -123,7 +123,7 @@
 		try {
 			const data = tags;
 			const response = await fetch(
-				'https://d7a3-2001-fb1-a1-8604-c0b-1fae-e75b-79a0.ngrok-free.app/Tags',
+				'https://register-form-asp-net-586743e95318.herokuapp.com/Tags',
 				{
 					method: 'POST',
 					headers: {
@@ -153,7 +153,7 @@
 			console.log(JSON.stringify(formValues));
 
 			const response = await fetch(
-				'https://d7a3-2001-fb1-a1-8604-c0b-1fae-e75b-79a0.ngrok-free.app/GoogleSheet',
+				'https://register-form-asp-net-586743e95318.herokuapp.com/GoogleSheet',
 				{
 					method: 'POST',
 					headers: {

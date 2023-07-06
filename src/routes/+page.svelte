@@ -121,7 +121,7 @@
 		}
 
 		try {
-			const data = newTag;
+			const data = [newTag];
 			const response = await fetch(
 				'https://register-form-asp-net-586743e95318.herokuapp.com/Tags',
 				{

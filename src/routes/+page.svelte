@@ -122,7 +122,7 @@
 			required: tagRequired.checked
 		};
 		if (newTag.name) {
-			tags = [...tags, newTag];
+			tags.push(newTag)
 			tagNameInput.value = '';
 			selectedTagType = null;
 			tagRequired.checked = false;

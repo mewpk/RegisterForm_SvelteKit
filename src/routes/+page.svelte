@@ -121,7 +121,7 @@
 		}
 
 		try {
-			const data = tags;
+			const data = newTag;
 			const response = await fetch(
 				'https://register-form-asp-net-586743e95318.herokuapp.com/Tags',
 				{
@@ -233,7 +233,7 @@
 			<div class="flex flex-col w-[80%] mx-auto">
 				{#each tags as tag}
 					<div class="flex mb-4 flex-col">
-						{#if tag.required}
+						{#if tag && tag.required }
 							<label for="{tag.name}" class="text-lg font-bold text-gray-900"
 								>{tag.name}:<span class="text-red-500 ml-2">*</span></label
 							>

@@ -235,6 +235,7 @@
 			<div class="flex flex-col w-[80%] mx-auto">
 				{#if tags.length > 0}
 					{#each tags as tag}
+					{console.log(tag)}
 						<div class="flex mb-4 flex-col">
 							{#if tag && tag.required}
 								<label for={tag.name} class="text-lg font-bold text-gray-900"

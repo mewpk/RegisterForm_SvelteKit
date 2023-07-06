@@ -3,7 +3,9 @@
 	import logo from '$lib/images/svelte-logo.svg';
 	import github from '$lib/images/github.svg';
 </script>
-
+<head>
+	<title>Rgister-Form</title>
+  </head>
 <header>
 	<div class="corner">
 		<a href="https://github.com/mewpk">

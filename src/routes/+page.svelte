@@ -5,7 +5,11 @@
 
 	let isLoading = false;
 	let isLoggedIn = false;
-	let tags = [];
+	let tags = [
+  { name: 'Name', type: 'text', required: true },
+  { name: 'tag2', type: 'checkbox', required: false },
+];
+
 	let tagTypes = [
 		'checkbox',
 		'color',

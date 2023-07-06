@@ -82,6 +82,9 @@
 		} catch (error) {
 			console.error(error);
 		}
+		
+	}
+	async function getTags(){
 		try {
 			const response = await fetch('https://register-form-asp-net-586743e95318.herokuapp.com/Tags');
 			if (response.ok) {
@@ -97,7 +100,6 @@
 			console.error('Error:', error.message);
 		}
 	}
-
 	onMount(async () => {
 		// Load the Line SDK script asynchronously
 		const script = document.createElement('script');
@@ -110,7 +112,7 @@
 		};
 		document.body.appendChild(script);
 	});
-
+	onMount(getTags)
 	async function addTag() {
 		const tagNameInput = document.getElementById('tag-name');
 		const tagRequired = document.getElementById('tag-required');
@@ -239,7 +241,6 @@
 			<div class="flex flex-col w-[80%] mx-auto">
 				{#if tags.length > 0}
 					{#each tags as tag}
-					{console.log(tag)}
 						<div class="flex mb-4 flex-col">
 							{#if tag && tag.required}
 								<label for={tag.name} class="text-lg font-bold text-gray-900"

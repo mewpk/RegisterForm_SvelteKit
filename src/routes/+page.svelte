@@ -134,6 +134,7 @@
 
 			if (response.ok) {
 				const responseData = await response.json();
+				tags = responseData.data;
 			} else {
 				console.error('Request failed:', response.status);
 			}

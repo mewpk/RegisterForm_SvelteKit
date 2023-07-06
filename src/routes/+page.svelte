@@ -250,7 +250,7 @@
 									<input
 										type="checkbox"
 										required
-										bind:group={tag.value}
+										bind:value={tag.value}
 										class="border border-gray-400 p-2 rounded-lg ml-2"
 									/>
 								{:else if tag.type === 'color'}
@@ -393,7 +393,7 @@
 								{#if tag.type === 'checkbox'}
 									<input
 										type="checkbox"
-										bind:group={tag.value}
+										bind:value={tag.value}
 										class="border border-gray-400 p-2 rounded-lg ml-2"
 									/>
 								{:else if tag.type === 'color'}

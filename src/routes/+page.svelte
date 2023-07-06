@@ -231,6 +231,7 @@
 		{/if}
 		<form class="mt-8" on:submit|preventDefault={handleSubmit}>
 			<div class="flex flex-col w-[80%] mx-auto">
+				{#if tags.length > 0}
 				{#each tags as tag}
 					<div class="flex mb-4 flex-col">
 						{#if tag && tag.required }
@@ -506,6 +507,7 @@
 						{/if}
 					</div>
 				{/each}
+				{/if}
 				<input
 					type="submit"
 					class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"

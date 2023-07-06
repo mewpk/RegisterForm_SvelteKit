@@ -82,6 +82,7 @@
 			const response = await fetch('https://register-form-asp-net-586743e95318.herokuapp.com/Tags');
 			if (response.ok) {
 				const res = await response.json();
+				console.log(res);
 				tags = res.data;
 			} else {
 				console.error('Error:', response.status);
@@ -105,15 +106,15 @@
 	});
 
 	async function addTag() {
-		const tagNameInput = document.getElementById('tag-name');
-		const tagRequired = document.getElementById('tag-required');
+		const tagNameInput =  document.getElementById('tag-name');
+		const tagRequired =  document.getElementById('tag-required');
 		const newTag = {
 			name: tagNameInput.value,
 			type: selectedTagType,
 			required: tagRequired.checked
 		};
 		if (newTag.name) {
-			tags = [...tags, newTag];
+			tags =   [...tags, newTag];
 			tagNameInput.value = '';
 			selectedTagType = null;
 			tagRequired.checked = false;
@@ -233,7 +234,7 @@
 				{#each tags as tag}
 					<div class="flex mb-4 flex-col">
 						{#if tag.required}
-							<label for={tag.name} class="text-lg font-bold text-gray-900"
+							<label for="{tag.name}" class="text-lg font-bold text-gray-900"
 								>{tag.name}:<span class="text-red-500 ml-2">*</span></label
 							>
 							{#if tag.type === 'checkbox'}
@@ -379,7 +380,7 @@
 								/>
 							{/if}
 						{:else}
-							<label for={tag.name} class="text-lg font-bold text-gray-900">{tag.name}:</label>
+							<label for="{tag.name}" class="text-lg font-bold text-gray-900">{tag.name}:</label>
 							{#if tag.type === 'checkbox'}
 								<input
 									type="checkbox"

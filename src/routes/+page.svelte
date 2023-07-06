@@ -240,9 +240,9 @@
 		<form class="mt-8" on:submit|preventDefault={handleSubmit}>
 			<div class="flex flex-col w-[80%] mx-auto">
 				{#if tags.length > 0}
-					{#each tags as tag}
+					{#each tags as tag  (tag.name, tag.value)} 
 						<div class="flex mb-4 flex-col">
-							{#if tag && tag.required}
+							{#if tag && tag.required }
 								<label for={tag.name} class="text-lg font-bold text-gray-900"
 									>{tag.name}:<span class="text-red-500 ml-2">*</span></label
 								>
